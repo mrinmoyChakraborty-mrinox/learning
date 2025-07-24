@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="para">
+<h1>Choose the service you want to use , {{session["username"]}}</h1><br><br>
+<p>
+    <a class="button button1" href="/addclass">Add Class</a>
+    <a class="button button2" href="{{ url_for('chooseclass', action='manage_students') }}">Manage Students<span style="font-weight: bold">(add/view/remove/update)</span></a>
+    <a class="button button3" href="{{ url_for('chooseclass', action='mark_attendance') }}">Mark Attendance</a>
+
+    <a class="button button4" href="{{ url_for('chooseclass', action='view_reports') }}">View Reports</a>
+</p>
+</div>
+
+{% endblock %}

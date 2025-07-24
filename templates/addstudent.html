@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<div class="para">
+<form method="POST" action='{{url_for("addstudent",class_id=class_id)}}'>
+  <div id="student-list">
+    <div>
+      <input type="text" name="name[]" placeholder="Name">
+      <input type="text" name="roll[]" placeholder="Roll No">
+    </div>
+  </div>
+  <button type="button" onclick="addStudent()">➕</button>
+  <button type="submit">Done</button>
+</form>
+</div>
+
+{% endblock %}

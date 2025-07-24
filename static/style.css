@@ -1,0 +1,152 @@
+#header{
+    background-color: black;
+    margin: 0 auto ;
+    width: 100%;
+    float: left;
+}
+.headl{
+    text-decoration: none;
+}
+
+#header ul li{
+    list-style-type: none;
+    display:inline;
+    font-size: large;
+
+}
+#header li a{
+    color: ghostwhite;
+    border-right:2px solid white;
+    padding:3px 10px;
+    transition-duration: 0.4s;
+}
+#header li a:hover{
+
+    background-color:antiquewhite;
+    color:black;
+}
+.center-box{
+    min-height: calc(80vh - 60px); /* Leave room for navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.button{
+    size: 20px;
+    font-size: 20px;
+    
+    display: inline-block;
+    cursor:pointer;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 2px solid black;
+    font-weight: bold;
+    transition-duration:0.4s ;
+    background-color: white;
+    color:black;
+    outline:none;
+
+}
+.button:hover{
+    
+    font-size:18px;
+    text-decoration: none;
+    background-color:black;
+    color:white;
+}
+.para{
+    text-align: center;
+    margin-top: 20px;
+    font-size: larger;
+}
+form button[type=submit]{
+    size:30px;
+    font-size: 20px;
+    padding: 3px 4px 3px 4px;
+    background-color:white;
+    color:black;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+}
+form button[type=submit]:hover{
+    size:20px;
+    font-size: 15px;
+    background-color:black;
+    color:white;
+}
+h2.main-container{
+    text-overflow:inherit;
+    text-align: center;
+    margin-top: 20px;
+    
+}
+.main-container{
+    margin :20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+h1.main-container{
+    margin-bottom: 20px;
+
+}
+form{
+    color: black;
+    size:30px;
+    font-size: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
+}
+form input[type=password]:focus,input[type=text]:focus{
+    border: 3px solid black;
+    padding: 3px 2px;
+    align-items: center;
+
+
+}
+/*form input[type=password]:empty,input[type=text]:empty{
+    border: 3px solid rgb(255, 0, 0);
+    padding: 3px 2px;
+    align-items: center;
+
+
+}*/
+body ul li{
+    list-style-type:none;
+}
+.boxt{
+    text-overflow:inherit;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "DynaPuff", system-ui;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings:"width" 100;
+}
+
+
+   
+form input[type=submit]{
+    size:10px ;
+    font-size: 25px;
+    padding: 3px 4px 3px 4px;
+    background-color: antiquewhite;
+    color:black;
+    transition-duration: 0.4s;
+
+}
+form input[type=submit]:hover{
+    cursor:pointer;
+    size:32px;
+    font-size: 30px;
+    background-color: lightgreen;
+    box-shadow: auto rgba(0,0,0,0.1);
+}

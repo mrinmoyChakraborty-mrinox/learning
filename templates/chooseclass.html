@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="para">
+<h1>
+ Choose Which Class You Want To {{action.replace("_"," ").title()}}:
+
+</h1>
+{% if classes %}
+    {% for class in classes %}
+        
+      {% if action == 'manage_students' %}
+        <a href="{{ url_for('managestudent', classname=class.name,class_id=class.id) }}" class="button">
+          {{ class.name }}
+        </a>
+      {% elif action == 'mark_attendance' %}
+        <a href="{{ url_for('markattendance',classname=class.name, class_id=class.id) }}" class="button">
+          {{ class.name }}
+        </a>
+      {% elif action == 'view_report' %}
+        <a href="{{ url_for('viewreport',classname=class.name, class_id=class.id) }}" class="button">
+          {{ class.name }}
+        </a>
+      {% else %}
+        <a href="#" class="button">{{ cls.name }}</a>
+      {% endif %}
+    
+  {% endfor %}
+
+{% else %}
+    <p>You haven't added any classes yet.</p>
+{% endif %} 
+</div>   
+{% endblock %}
