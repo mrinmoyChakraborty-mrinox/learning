@@ -11,7 +11,7 @@ def get_connection():
     )
 def check_user(db,username):
     cur=db.cursor(dictionary=True)
-    qry="SELECT * FROM CREDENTIALS WHERE USERNAME=%s"
+    qry="SELECT * FROM credentials WHERE username=%s"
     cur.execute(qry,(username,))
     data=cur.fetchone()
     if data:
@@ -25,7 +25,7 @@ def check_user(db,username):
                 
 def insert_user(db,username,email,password,id):
     cur=db.cursor(dictionary=True)
-    qry="INSERT INTO CREDENTIALS (username, email, password, role) VALUES (%s,%s,%s,%s)"
+    qry="INSERT INTO credentials (username, email, password, role) VALUES (%s,%s,%s,%s)"
     cur.execute(qry,(username,email,password,id))
     db.commit()
     user_id=cur.lastrowid
@@ -34,11 +34,11 @@ def insert_user(db,username,email,password,id):
     return user_id
 def insert_class(db,name,teacher_id):
     cur=db.cursor()
-    qry="INSERT INTO CLASSES (NAME) VALUES (%s)"
+    qry="INSERT INTO classes (NAME) VALUES (%s)"
     cur.execute(qry,(name,))
     db.commit()
     clid=cur.lastrowid
-    qry2="INSERT INTO TEACHER_CLASSES (teacher_id,class_id) VALUES (%s,%s)"
+    qry2="INSERT INTO teacher_classes (teacher_id,class_id) VALUES (%s,%s)"
     cur.execute(qry2,(teacher_id,clid))
     db.commit()
     cur.close()
@@ -64,14 +64,14 @@ def insert_student(db,names,rolls,class_id):
     db.close()
 def get_students(db,class_id):
     cur=db.cursor(dictionary=True)
-    cur.execute("SELECT id,name,roll_number FROM STUDENTS WHERE CLASS_ID=%s",(class_id,))
+    cur.execute("SELECT id,name,roll_number FROM students WHERE class_id=%s",(class_id,))
     data=cur.fetchall()
     cur.close()
     db.close()
     return data
 def markattendance(db,student_id,date,status):
     cur=db.cursor()
-    cur.execute("INSERT INTO ATTENDANCE (student_id,date,status) VALUES (%s,%s,%s)",(student_id,date,status))
+    cur.execute("INSERT INTO attendance (student_id,date,status) VALUES (%s,%s,%s)",(student_id,date,status))
     db.commit()
     cur.close()
     
