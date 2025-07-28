@@ -1,7 +1,7 @@
 import time
 from datetime import date
 from werkzeug.security import generate_password_hash,check_password_hash
-import db
+from app import db
 from flask import render_template,url_for,flash,redirect,session,request
 from app import app
 from app.forms import LoginForm
