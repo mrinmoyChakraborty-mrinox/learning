@@ -75,4 +75,18 @@ def markattendance(db,student_id,date,status):
     db.commit()
     cur.close()
     
-def removestudent(db,)
+def remove_student(db,stuid):
+    cur=db.cursor()
+    cur.execute("DELETE FROM attendance WHERE student_id=%s",(stuid,))
+    db.commit()
+    cur.execute("DELETE FROM students WHERE id=%s",(stuid,))
+    db.commit()
+    
+def update_student(db,stuid,roll,name):
+
+    cur = db.cursor()
+    cur.execute("UPDATE students SET name=%s,roll_number=%s WHERE id=%s",(name,roll,stuid))
+    db.commit()
+def viewbystudent(db,stuid):
+    cur =db.cursor(dictionary=True)
+    cur.execute("SELECT date, status FROM attendance WHERE student_id = %s")  
