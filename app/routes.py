@@ -81,7 +81,9 @@ def login():
 
 @app.route("/logout")
 def logout():
-   session.clear()
+   session.pop("user_id", None)
+   session.pop("username", None)
+   session.pop("role", None)
    flash("You have been logged out.")
    return redirect(url_for("login"))
 @app.route("/dashboard")
@@ -162,4 +164,6 @@ def markattendance(class_id,classname):
          return redirect(url_for("dashboard"))
 
    return render_template("markattendance.html",title="Mark Attendance",students=students,classname=classname,class_id=class_id)
-   
+@app.route("/about")
+def about():
+    return render_template("about.html") 

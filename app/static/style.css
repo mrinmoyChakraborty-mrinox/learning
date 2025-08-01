@@ -150,3 +150,31 @@ form input[type=submit]:hover{
     background-color: lightgreen;
     box-shadow: auto rgba(0,0,0,0.1);
 }
+.about-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+.about-container h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+.about-container h3 {
+    color: #27ae60;
+    margin-top: 20px;
+  }
+.about-container p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.5;
+  }
+.about-container ul {
+    padding-left: 20px;
+  }
+.about-container ul li {
+    margin-bottom: 8px;
+  }
