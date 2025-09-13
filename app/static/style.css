@@ -178,3 +178,43 @@ form input[type=submit]:hover{
 .about-container ul li {
     margin-bottom: 8px;
   }
+#attendance-container {
+    max-width: 800px;
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+  }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+.summary {
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+.good {
+    background: #d4edda;
+    color: #155724;
+  }
+
+.critical {
+    background: #f8d7da;
+    color: #721c24;
+  }

@@ -75,3 +75,45 @@ def markattendance(db,student_id,date,status):
     db.commit()
     cur.close()
     
+def remove_student(db,stuid):
+    cur=db.cursor()
+    cur.execute("DELETE FROM attendance WHERE student_id=%s",(stuid,))
+    db.commit()
+    cur.execute("DELETE FROM students WHERE id=%s",(stuid,))
+    db.commit()
+    
+def update_student(db,stuid,roll,name):
+
+    cur = db.cursor()
+    cur.execute("UPDATE students SET name=%s,roll_number=%s WHERE id=%s",(name,roll,stuid))
+    db.commit()
+def viewbystudent(db,stuid):
+    cur =db.cursor(dictionary=True)
+    cur.execute("SELECT date, status FROM attendance WHERE student_id = %s ORDER BY date DESC",(stuid,))
+    data=cur.fetchall()
+    return data
+def getstudentinfo(db,uid):
+    # Get student details
+    cur=db.cursor(dictionary=True)
+    cur.execute("""
+        SELECT id, name, roll_number, class_id 
+        FROM students 
+        WHERE credentials_id = %s
+    """, (uid,))
+    student = cur.fetchone()
+    return student
+def getpossibleclasses(db,uid):
+    cur=db.cursor(dictionary=True)
+    cur.execute("""
+            SELECT s.id AS student_id, s.name, s.roll_number, c.name AS class_name
+            FROM students s
+            JOIN classes c ON s.class_id = c.id
+            WHERE s.credentials_id IS NULL
+            AND s.name = (SELECT username FROM credentials WHERE id=%s)
+        """, (uid,))
+    possible_classes = cur.fetchall()
+    return possible_classes  
+def linkstu(db,uid,selected_id):
+    cur=db.cursor()
+    cur.execute("UPDATE students SET credentials_id=%s WHERE id=%s", (uid, selected_id))
+    db.commit()

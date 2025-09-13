@@ -16,3 +16,11 @@ function showDate() {
   document.getElementById("today-form").style.display = "none";
   document.getElementById("date-form").style.display = "block";
 }
+function showbystudent(){
+  document.getElementById("attendance-container").style.display="block";
+  document.getElementById("stuclasses").style.display="none";
+}
+function showstuclasses(){
+  document.getElementById("attendance-container").style.display="none";
+  document.getElementById("stuclasses").style.display="block";
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>
+    
+<button class="button" onclick="showstuclasses()" >Link Class To Account</button>
+
+<button class="button" onclick="showbystudent()" >View Your Attendance Report</button>
+</p>
+<div id="attendance-container" style="display: none;">
+<h2>Welcome, {{ student.name }}</h2>
+  <p><b>Class:</b> {{ student.class_name }} | <b>Roll:</b> {{ student.roll_number }}</p>
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+    {% for record in attendance %}
+    <tr>
+      <td>{{ record.date }}</td>
+      <td>{{ record.status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="summary {% if percentage >= 75 %}good{% else %}critical{% endif %}">
+    Attendance: {{ percentage }}% <br>
+    {% if percentage >= 75 %}
+      ✅ Good attendance!
+    {% else %}
+      ⚠ Below critical level. Please attend more classes!
+    {% endif %}
+  </div>
+</div>
+
+<div id="stuclasses" style="display: none;">
+{% if student %}
+  <h2>Welcome {{ student.name }}</h2>
+  <p>Class: {{ student.class_name }}</p>
+  <p>Roll: {{ student.roll_number }}</p>
+  <p><b>Your account is permanently linked to this class.</b></p>
+
+{% elif possible_classes %}
+  <h3>Choose your class to link account:</h3>
+  <ul>
+    {% for s in possible_classes %}
+      <li>
+        {{ s.class_name }} (Roll: {{ s.roll_number }})
+        <form method="POST">
+          <button type="submit" name="student_id" value="{{ s.student_id }}">Link This Class</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% else %}
+  <p>No matching class found. Contact teacher to add you.</p>
+{% endif %}
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

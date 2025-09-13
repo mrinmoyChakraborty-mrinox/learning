@@ -74,7 +74,7 @@ def login():
             if check['role'] == 'teacher':
                 return redirect(url_for('dashboard'))
             elif check['role'] == 'student':
-                return redirect(url_for('studentdashboard'))
+                return redirect(url_for('student_dashboard'))
             
 
    return render_template("login.html",title="Sign In",form=form)
@@ -88,7 +88,18 @@ def logout():
    return redirect(url_for("login"))
 @app.route("/dashboard")
 def dashboard():
-   return render_template("dashboard.html",title="Dashboard")
+    if "role" not in session:
+        return redirect(url_for("login"))  # If user is not logged in
+
+    if session["role"] == "teacher":
+        # Render teacher dashboard directly
+        return render_template("dashboard.html")
+
+    elif session["role"] == "student":
+        return redirect(url_for("student_dashboard"))
+
+    return redirect(url_for("login"))
+
 
 @app.route("/addclass",methods=["GET","POST"])
 def addclass():
@@ -166,4 +177,37 @@ def markattendance(class_id,classname):
    return render_template("markattendance.html",title="Mark Attendance",students=students,classname=classname,class_id=class_id)
 @app.route("/about")
 def about():
-    return render_template("about.html") 
+    return render_template("about.html")
+@app.route("/student_dashboard", methods=["GET", "POST"])
+def student_dashboard():
+    if "user_id" not in session or session.get("role") != "student":
+        return redirect(url_for("login"))
+
+    dbs = db.get_connection()
+    student=db.getstudentinfo(dbs,session["user_id"])
+    # If student has not linked account yet
+    if not student or not student["class_id"]:
+        possible_classes=db.getpossibleclasses(dbs,session["user_id"])
+
+        if request.method == "POST":
+            selected_id = int(request.form.get("student_id"))
+            db.linkstu(dbs,session["user_id"],selected_id)
+            return redirect(url_for("student_dashboard"))
+
+        return render_template("student_dashboard.html", student=None, possible_classes=possible_classes,
+        attendance=[],percentage=0)
+
+ 
+    attendance = db.viewbystudent(dbs,student["id"])
+
+    total_classes = len(attendance)
+    present_count = sum(1 for a in attendance if a["status"].lower() == "present")
+    percentage = round((present_count / total_classes) * 100, 2) if total_classes > 0 else 0
+
+    return render_template(
+        "student_dashboard.html",
+        student=student,
+        attendance=attendance,
+        percentage=percentage,
+        possible_classes=None
+    )
