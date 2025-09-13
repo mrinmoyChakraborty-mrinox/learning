@@ -1,13 +1,13 @@
 import mysql.connector as sql
-
+import os
 
 def get_connection():
     return sql.connect(
-        host='sql12.freesqldatabase.com',
-        user='sql12792382',
-        password='5FlV4pGmQJ',
-        database='sql12792382',
-        port=3306
+        host='mysql-13ff7a9f-chakrabortymrinmoy27011-dab0.k.aivencloud.com',
+        user='avnadmin',
+        password=os.getenv("AIVEN_PASSWORD"),
+        database='defaultdb',
+        port=21054
     )
 def check_user(db,username):
     cur=db.cursor(dictionary=True)
@@ -96,9 +96,9 @@ def getstudentinfo(db,uid):
     # Get student details
     cur=db.cursor(dictionary=True)
     cur.execute("""
-        SELECT id, name, roll_number, class_id 
-        FROM students 
-        WHERE credentials_id = %s
+        SELECT students.id as id, students.name as name, roll_number, class_id,classes.name as class_name
+        FROM students, classes 
+        WHERE credentials_id = %s AND class_id=classes.id
     """, (uid,))
     student = cur.fetchone()
     return student

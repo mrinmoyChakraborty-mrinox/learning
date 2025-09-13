@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-
-<p>
-    
-<button class="button" onclick="showstuclasses()" >Link Class To Account</button>
-
-<button class="button" onclick="showbystudent()" >View Your Attendance Report</button>
-</p>
+<div class="para">
+  <p> 
+  <button class="button" onclick="showstuclasses()" >Link Class To Account</button>
+  <button class="button" onclick="showbystudent()" >View Your Attendance Report</button>
+  </p>
+</div>
 <div id="attendance-container" style="display: none;">
 <h2>Welcome, {{ student.name }}</h2>
   <p><b>Class:</b> {{ student.class_name }} | <b>Roll:</b> {{ student.roll_number }}</p>
